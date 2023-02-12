@@ -135,6 +135,7 @@
       region: "{{ region }}" 
       wait: yes 
       count: 1
+      state: running
       vpc_subnet_id: "{{ subnet_result.subnet.id }}"
       network:
         assign_public_ip: true
