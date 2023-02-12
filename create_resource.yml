@@ -5,8 +5,8 @@
   vars_files:
   -  playbook_vars/{{ global_var_environment }}/app_server_vars.yml 
   vars:
-    aws_access_key: "${{ secrets.AWS_ACCESS_KEY }}"
-    aws_secret_key: "${{ secrets.AWS_SECRET_ACCESS_KEY }}"
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
     
   tasks:
   - name: create a new ec2 VPC
