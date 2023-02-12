@@ -22,10 +22,16 @@ jobs:
       - name: Get Github action IP
         id: ip
         uses: haythem/public-ip@v1.2
-      - name: Call the ansible Playbook
+      - name: AWS configure
+        uses: aws-actions/configure-aws-credentials@v1
         with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY  }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-west-1
+      - name: Call the ansible Playbook
+        env:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
-          ansible-playbook create_resource.yml --extra-vars global_var_environment=test aws_access_key=${{ aws_access_key }} aws_secret_key=${{ aws_secret_key }}
+          ansible-playbook create_resource.yml --extra-vars global_var_environment=test aws_access_key=${aws_access_key} aws_secret_key=${aws_secret_key}
 
