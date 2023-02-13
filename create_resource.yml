@@ -143,6 +143,11 @@
   - name: List contents of the ssh
     shell: >
         cat ~/.ssh/legalfind_id_rsa.pub
+    register: file_content
+
+  - name: "Print the file content to a console"
+    debug:
+      msg: "{{ file_content.stdout }}"
 
   # - name: launching EC2 instance using Ansible
   #   # Launching an EC2 instance
