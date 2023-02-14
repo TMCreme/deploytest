@@ -1,0 +1,23 @@
+---
+- hosts: legalfindhost 
+  gather_facts: True 
+  become: True
+  vars_files:
+  -  playbook_vars/{{ global_var_environment }}/app_server_vars.yml 
+  vars:
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
+    
+  tasks:
+  - name: Install required packages (docker, docker-compose, git)
+    shell: >
+      apt install -y git
+
+  # - name: Clone the github repository
+
+
+
+  
+
+
+
