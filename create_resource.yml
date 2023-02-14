@@ -170,7 +170,7 @@
       network:
         assign_public_ip: true
         security_group: "{{ security_group_name }}"
-      register: ec2_results
+    register: ec2_results
 
   - name: Create the ansible hosts file
     file:  
