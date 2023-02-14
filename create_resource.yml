@@ -126,18 +126,18 @@
           gateway_id: "{{ igw_result.gateway_id }}"
     register: public_route_table
 
-  - name: Create ED25519 key pair
-    amazon.aws.ec2_key:
-      aws_access_key: "{{ aws_access_key }}"
-      aws_secret_key: "{{ aws_secret_key }}"
-      region: "{{ region }}"
-      name: "{{ ec2_key_pair }}"
-      key_type: ed25519
-    register: key_pair_result
+  # - name: Create ED25519 key pair
+  #   amazon.aws.ec2_key:
+  #     aws_access_key: "{{ aws_access_key }}"
+  #     aws_secret_key: "{{ aws_secret_key }}"
+  #     region: "{{ region }}"
+  #     name: "{{ ec2_key_pair }}"
+  #     key_type: ed25519
+  #   register: key_pair_result
 
   - name: Create an SSH key for access
     shell: > 
-        ssh-keygen -b 2048 -t rsa -N "" -C "creating SSH" -f ~/.ssh/legalfind_id_rsa
+        ssh-keygen -b 1024 -t rsa -N "" -C "creating SSH" -f ~/.ssh/legalfind_id_rsa
         creates="~/.ssh/legalfind_id_rsa"
 
   - name: create key pair using key_material obtained using 'file' lookup plugin
