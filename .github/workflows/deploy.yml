@@ -28,10 +28,17 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY  }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: eu-west-1
-      - name: Call the ansible Playbook
+      - name: Call the ansible Playbook for creating instance
         env:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
           ansible-playbook create_resource.yml -e global_var_environment=test -e aws_access_key=${aws_access_key} -e aws_secret_key=${aws_secret_key}
+
+      - name: Call the ansible Playbook for deployment
+        env:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |
+          ansible-playbook app_deploy.yml -e global_var_environment=test -e aws_access_key=${aws_access_key} -e aws_secret_key=${aws_secret_key}
 
