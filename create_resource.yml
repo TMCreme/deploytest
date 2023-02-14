@@ -169,7 +169,7 @@
       vpc_subnet_id: "{{ subnet_result.subnet.id }}"
       network:
         assign_public_ip: true
-        security_group: "{{ security_group_name }}"
+      security_group: "{{ security_group_name }}"
     register: ec2_results
 
   - name: Print Public IP for the EC2 instance
