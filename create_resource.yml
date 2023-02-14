@@ -173,14 +173,17 @@
       register: ec2_results
 
     - name: Create the ansible hosts file
-      shell: > 
-        touch /etc/hosts
+      file:  
+        path: /etc/hosts
+        state: touch
 
     - name: Set Ip as an ansible hosts
-      shell: >
-        echo  "[legalfindhost]
+      copy: 
+        destination: /etc/hosts
+        content: |
+          [legalfindhost]
           {{ ec2_results.network_interfaces.association.public_ip }}
-          " > /etc/hosts
+         
     
   # - name: print out new vpc, subnet id, and security group for vpc
   #   # print out new subnet id and security group
