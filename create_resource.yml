@@ -172,17 +172,17 @@
         security_group: "{{ security_group_name }}"
       register: ec2_results
 
-    - name: Create the ansible hosts file
-      file:  
-        path: /etc/hosts
-        state: touch
+  - name: Create the ansible hosts file
+    file:  
+      path: /etc/hosts
+      state: touch
 
-    - name: Set Ip as an ansible hosts
-      copy: 
-        destination: /etc/hosts
-        content: |
-          [legalfindhost]
-          {{ ec2_results.network_interfaces.association.public_ip }}
+  - name: Set Ip as an ansible hosts
+    copy: 
+      destination: /etc/hosts
+      content: |
+        [legalfindhost]
+        {{ ec2_results.network_interfaces.association.public_ip }}
          
     
   # - name: print out new vpc, subnet id, and security group for vpc
