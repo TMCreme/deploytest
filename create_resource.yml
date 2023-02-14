@@ -197,7 +197,7 @@
       dest: /etc/ansible/hosts
       content: |
         [legalfindhost]
-        ubuntu@{{ ec2_results.instances[0].network_interfaces[0].association.public_ip }}
+        {{ ec2_results.instances[0].network_interfaces[0].association.public_ip }}
 
          
     
