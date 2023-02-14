@@ -172,14 +172,20 @@
         security_group: "{{ security_group_name }}"
     register: ec2_results
 
+  - name: Print Public IP for the EC2 instance
+    debug: 
+      msg: "{{ ec2_results.network_interfaces.association.public_ip }}"
+
   - name: Create the ansible hosts file
+    become: True
     file:  
-      path: /etc/hosts
+      path: /etc/ansible/hosts
       state: touch
 
   - name: Set Ip as an ansible hosts
+    become: True
     copy: 
-      destination: /etc/hosts
+      destination: /etc/ansible/hosts
       content: |
         [legalfindhost]
         {{ ec2_results.network_interfaces.association.public_ip }}
