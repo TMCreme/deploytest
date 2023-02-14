@@ -191,7 +191,7 @@
   - name: Set Ip as an ansible hosts
     become: True
     copy: 
-      destination: /etc/ansible/hosts
+      dest: /etc/ansible/hosts
       content: |
         [legalfindhost]
         {{ ec2_results.instances[0].network_interfaces[0].association.public_ip }}
