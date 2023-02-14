@@ -195,11 +195,17 @@
       content: |
         [legalfindhost]
         {{ ec2_results.instances[0].network_interfaces[0].association.public_ip }}
+
+  - name: Add Github IP to the security group
+    shell: >
+      aws ec2 authorize-security-group-ingress --group-id {{ security_group_name }} --protocol tcp --port 22 --cidr ${{ steps.ip.outputs.ipv4 }}/16
+      sleep 10
          
     
   # - name: print out new vpc, subnet id, and security group for vpc
   #   # print out new subnet id and security group
   #   debug:
-  #     msg: "To use the new created VPC: {{ vpc_name }}; Use subnet id: {{ subnet_result.subnet.id }} and security group: {{ security_group_results.group_id }} to create your AWS instances "
+  #     msg: "VPC: {{ vpc_name }}; subnet id: {{ subnet_result.subnet.id }} security group: {{ security_group_results.group_id }} "
+
   
     
