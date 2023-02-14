@@ -42,5 +42,5 @@ jobs:
           github_ip: ${{ steps.ip.outputs.ipv4 }}
           ANSIBLE_HOST_KEY_CHECKING: False
         run: |
-          ansible-playbook app_deploy.yml -e global_var_environment=test -e aws_access_key=${aws_access_key} -e aws_secret_key=${aws_secret_key} -e github_ip=${github_ip}
+          ansible-playbook app_deploy.yml -u ubuntu -e global_var_environment=test -e aws_access_key=${aws_access_key} -e aws_secret_key=${aws_secret_key} -e github_ip=${github_ip}
 
