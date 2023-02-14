@@ -174,7 +174,7 @@
 
   - name: Print Public IP for the EC2 instance
     debug: 
-      msg: "{{ ec2_results.network_interfaces.association.public_ip }}"
+      msg: "{{ ec2_results.results['instances'][0]['public_ip'] }}"
 
   - name: Create the ansible hosts file
     become: True
@@ -188,7 +188,7 @@
       destination: /etc/ansible/hosts
       content: |
         [legalfindhost]
-        {{ ec2_results.network_interfaces.association.public_ip }}
+        {{ ec2_results.results['instances'][0]['public_ip'] }}
          
     
   # - name: print out new vpc, subnet id, and security group for vpc
