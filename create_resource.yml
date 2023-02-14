@@ -165,7 +165,7 @@
       region: "{{ region }}" 
       wait: yes 
       count: 1
-      state: running
+      state: started
       vpc_subnet_id: "{{ subnet_result.subnet.id }}"
       network:
         assign_public_ip: true
@@ -175,6 +175,12 @@
   - name: Print Public IP for the EC2 instance
     debug: 
       msg: "{{ ec2_results.instances[0].network_interfaces[0].association.public_ip }}"
+
+  - name: Create the ansible hosts directory
+    become: True
+    file:  
+      path: /etc/ansible
+      state: directory
 
   - name: Create the ansible hosts file
     become: True
