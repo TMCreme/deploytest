@@ -39,6 +39,8 @@ jobs:
         env:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          github_ip: ${{ steps.ip.outputs.ipv4 }}
+          ANSIBLE_HOST_KEY_CHECKING: False
         run: |
-          ansible-playbook app_deploy.yml -e global_var_environment=test -e aws_access_key=${aws_access_key} -e aws_secret_key=${aws_secret_key}
+          ansible-playbook app_deploy.yml -e global_var_environment=test -e aws_access_key=${aws_access_key} -e aws_secret_key=${aws_secret_key} -e github_ip=${github_ip}
 

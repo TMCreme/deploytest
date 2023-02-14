@@ -7,6 +7,7 @@
   vars:
     aws_access_key: "{{ aws_access_key }}"
     aws_secret_key: "{{ aws_secret_key }}"
+    github_ip: "{{ github_ip }}"
     
   tasks:
   - name: create a new ec2 VPC
@@ -71,6 +72,11 @@
         - 22
         cidr_ip: "{{ port22CidrBlock }}"
         rule_desc: allow all on port 22
+      - proto: tcp
+        ports:
+        - 22
+        cidr_ip: "{{ github_ip }}"
+        rule_desc: allow github on port 22
     register: security_group_results
 
   - name: create ec2 VPC Network access control list
@@ -196,10 +202,6 @@
         [legalfindhost]
         {{ ec2_results.instances[0].network_interfaces[0].association.public_ip }}
 
-  - name: Add Github IP to the security group
-    shell: >
-      aws ec2 authorize-security-group-ingress --group-id {{ security_group_name }} --protocol tcp --port 22 --cidr ${{ steps.ip.outputs.ipv4 }}/16
-      sleep 10
          
     
   # - name: print out new vpc, subnet id, and security group for vpc
