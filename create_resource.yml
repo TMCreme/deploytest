@@ -182,11 +182,13 @@
     file:  
       path: /etc/ansible
       state: directory
+      mode: '0400'
 
   - name: Create the ansible hosts file
     become: True
     file:  
       path: /etc/ansible/hosts
+      mode: '0400'
       state: touch
 
   - name: Set Ip as an ansible hosts
@@ -195,7 +197,7 @@
       dest: /etc/ansible/hosts
       content: |
         [legalfindhost]
-        {{ ec2_results.instances[0].network_interfaces[0].association.public_ip }}
+        ubuntu@{{ ec2_results.instances[0].network_interfaces[0].association.public_ip }}
 
          
     
