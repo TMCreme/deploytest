@@ -138,7 +138,7 @@
 
   - name: Create an SSH key for access
     shell: > 
-        ssh-keygen -b 4096 -t rsa -N "" -f ~/.ssh/legalfind_id_rsa
+        ssh-keygen -b 4096 -t ed25519 -N "" -f ~/.ssh/legalfind_id_rsa
         creates="~/.ssh/legalfind_id_rsa"
 
   - name: create key pair using key_material obtained using 'file' lookup plugin
