@@ -1,4 +1,4 @@
-name: Deploy AWS EC2
+name: Create an AWS EC2 instanace with resources
 on:
   push:
     branches:
@@ -35,12 +35,12 @@ jobs:
         run: |
           ansible-playbook create_resource.yml -e global_var_environment=test -e aws_access_key=${aws_access_key} -e aws_secret_key=${aws_secret_key}
 
-      - name: Call the ansible Playbook for deployment
-        env:
-          aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
-          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          github_ip: ${{ steps.ip.outputs.ipv4 }}
-          ANSIBLE_HOST_KEY_CHECKING: False
-        run: |
-          ansible-playbook app_deploy.yml -u ubuntu -e global_var_environment=test -e aws_access_key=${aws_access_key} -e aws_secret_key=${aws_secret_key} -e github_ip=${github_ip}
+      # - name: Call the ansible Playbook for deployment
+      #   env:
+      #     aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
+      #     aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      #     github_ip: ${{ steps.ip.outputs.ipv4 }}
+      #     ANSIBLE_HOST_KEY_CHECKING: False
+      #   run: |
+      #     ansible-playbook app_deploy.yml -u ubuntu -e global_var_environment=test -e aws_access_key=${aws_access_key} -e aws_secret_key=${aws_secret_key} -e github_ip=${github_ip}
 
