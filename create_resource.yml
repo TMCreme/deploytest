@@ -161,7 +161,7 @@
       aws_access_key: "{{ aws_access_key }}"
       aws_secret_key: "{{ aws_secret_key }}"
       key_name: "{{ ec2_key_pair }}"
-      instance_type: t2.micro 
+      instance_type: t2.large 
       image_id: "{{ ec2_image_ami }}" 
       region: "{{ region }}" 
       wait: yes 
@@ -171,6 +171,11 @@
       network:
         assign_public_ip: true
       security_group: "{{ security_group_name }}"
+      volumes: 
+        - device_name: /dev/sda1
+          ebs:
+            volume_size: 30
+            delete_on_termination: true 
     register: ec2_results
 
   - name: Print Public IP for the EC2 instance
