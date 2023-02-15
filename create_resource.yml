@@ -107,6 +107,7 @@
         - [200, 'tcp', 'allow', "{{ destinationCidrBlock }}", null, null, 80, 80]
         # allow egress ephemeral ports
         - [300, 'tcp', 'allow', "{{ destinationCidrBlock }}", null, null, 1024, 65535]
+        - [400, 'tcp', 'allow', "{{ destinationCidrBlock }}", null, null, 443, 443]
     register: acl_results
 
   - name: create ec2 VPC public subnet route table
